@@ -8,6 +8,7 @@
 
 #import "DADMainViewController.h"
 #import "DADFromAViewController.h"
+#import "DADFromSelfViewController.h"
 
 @interface DADMainViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -28,7 +29,7 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = 100;
     
-    self.cellArr = [[NSArray alloc] initWithObjects:@"第一个", @"第二个", @"第三个", @"第四个", @"第五个", @"第六个", @"第七个", nil];
+    self.cellArr = [[NSArray alloc] initWithObjects:@"only drag", @"drag and drop", @"第三个", @"第四个", @"第五个", @"第六个", @"第七个", nil];
     
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
@@ -54,7 +55,8 @@
             
             break;
         case 1: {
-            
+            DADFromSelfViewController *fromeAVC = [[DADFromSelfViewController alloc] init];
+            [self.navigationController pushViewController:fromeAVC animated:YES];
         }
             
             break;
