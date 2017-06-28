@@ -17,7 +17,7 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.frame = frame;
-        self.layer.cornerRadius = frame.size.height / 5;
+        self.layer.cornerRadius = frame.size.height / 4;
         self.backgroundColor = [UIColor redColor];
         [self loadUI];
     }

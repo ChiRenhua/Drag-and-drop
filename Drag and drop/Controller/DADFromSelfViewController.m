@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
     // imageView
@@ -33,15 +32,37 @@
     
     [self.view addSubview:imageView];
     
+    // copyImageView
+    UIImageView *copyImageView = [[UIImageView alloc] init];
+    copyImageView.frame = CGRectMake((self.view.bounds.size.width * 3 / 4 - 75) , (self.view.bounds.size.height - 150) / 2, 150, 150);
+    copyImageView.backgroundColor = [UIColor lightGrayColor];
+    UIDropInteraction *copyImageDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
+    [copyImageView addInteraction:copyImageDropInteraction];
+    copyImageView.userInteractionEnabled = YES;
+    copyImageView.layer.cornerRadius = 37.5;
+    
+    [self.view addSubview:copyImageView];
+    
     // label
-    UIDragInteraction *LabelDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width / 2 - self.view.bounds.size.width / 3) / 2, self.view.bounds.size.height / 4, self.view.bounds.size.width / 3, 30)];
+    UIDragInteraction *labelDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width / 2 - self.view.bounds.size.width / 4) / 2, self.view.bounds.size.height / 4, self.view.bounds.size.width / 4, 30)];
     label.text = @"来呀来呀拖我呀～～";
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor blackColor];
     label.userInteractionEnabled = YES;
-    [label addInteraction:LabelDragInteraction];
+    [label addInteraction:labelDragInteraction];
     [self.view addSubview:label];
+    
+    // copyLabel
+    UIDropInteraction *copyLabelDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
+    UILabel *copyLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width * 3 / 4 - self.view.bounds.size.width / 8), self.view.bounds.size.height / 4, self.view.bounds.size.width / 4, 30)];
+    copyLabel.backgroundColor = [UIColor lightGrayColor];
+    copyLabel.textAlignment = NSTextAlignmentCenter;
+    copyLabel.textColor = [UIColor blackColor];
+    copyLabel.userInteractionEnabled = YES;
+    copyLabel.layer.cornerRadius = 15.0f;
+    [copyLabel addInteraction:copyLabelDropInteraction];
+    [self.view addSubview:copyLabel];
     
     // deleteView
     UIDropInteraction *deleteViewDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
@@ -52,12 +73,12 @@
 
 #pragma mark - drag
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
-    return [self dragInteraction:interaction];
+    return [self dragInteraction:interaction session:session];
 }
 
 // 支持添加dragItem
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForAddingToSession:(id<UIDragSession>)session withTouchAtPoint:(CGPoint)point {
-    return [self dragInteraction:interaction];
+    return [self dragInteraction:interaction session:session];
 }
 
 - (void)dragInteraction:(UIDragInteraction *)interaction willAnimateLiftWithAnimator:(id<UIDragAnimating>)animator session:(id<UIDragSession>)session {
@@ -81,25 +102,67 @@
     }];
 }
 
+- (void)dragInteraction:(UIDragInteraction *)interaction sessionDidTransferItems:(id<UIDragSession>)session {
+    if ([interaction.view isKindOfClass:[UIImageView class]]) {
+        UIImageView *imageView = (UIImageView *)interaction.view;
+        imageView.image = nil;
+        
+    }else if([interaction.view isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)interaction.view;
+        label.text = nil;
+    }
+}
+
 #pragma mark - drop
 
 - (UIDropProposal *)dropInteraction:(UIDropInteraction *)interaction sessionDidUpdate:(id<UIDropSession>)session {
-    UIDropOperation dropOperation;
-    dropOperation = UIDropOperationMove;
+    UIDropOperation dropOperation = UIDropOperationForbidden;
+    
+    if ([interaction.view isKindOfClass:[UIImageView class]]) {
+        if ([session canLoadObjectsOfClass:[UIImage class]]) {
+            dropOperation = UIDropOperationMove;
+        }else {
+            dropOperation = UIDropOperationForbidden;
+        }
+    }
+    
+    if ([interaction.view isKindOfClass:[UILabel class]]) {
+        if ([session canLoadObjectsOfClass:[NSString class]]) {
+            dropOperation = UIDropOperationMove;
+        }else {
+            dropOperation = UIDropOperationForbidden;
+        }
+    }
+    
+    if ([interaction.view isKindOfClass:[DADDeleteView class]]) {
+        dropOperation = UIDropOperationMove;
+    }
     
     return [[UIDropProposal alloc] initWithDropOperation:dropOperation];
 }
 
 - (void)dropInteraction:(UIDropInteraction *)interaction performDrop:(id<UIDropSession>)session {
-    [session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
-        UIImage *image = (UIImage *)[objects firstObject];
-        image = nil;
-    }];
-    
-    [session loadObjectsOfClass:[NSString class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
-        NSString *str = (NSString *)[objects firstObject];
-        str = nil;
-    }];
+    if (![interaction.view isKindOfClass:[DADDeleteView class]]) {
+        if ([interaction.view isKindOfClass:[UIImageView class]]) {
+            [session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+                if (objects.count) {
+                    UIImage *image = [objects firstObject];
+                    UIImageView *imageView = (UIImageView *)interaction.view;
+                    imageView.image = image;
+                }
+            }];
+        }
+        
+        if ([interaction.view isKindOfClass:[UILabel class]]) {
+            [session loadObjectsOfClass:[NSString class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+                if (objects.count) {
+                    NSString *str = [objects firstObject];
+                    UILabel *label = (UILabel *)interaction.view;
+                    label.text = str;
+                }
+            }];
+        }
+    }
     
     __typeof(&*self) __weak weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -108,7 +171,17 @@
 }
 
 #pragma mark - help
-- (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction {
+- (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction session:(id<UIDragSession>)session{
+    __block BOOL isRepeat = NO;
+    [session.items enumerateObjectsUsingBlock:^(UIDragItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.localObject == interaction.view) {
+            isRepeat = YES;
+        }
+    }];
+    
+    if (isRepeat) {
+        return nil;
+    }
     NSItemProvider *itemProvider;
     if ([interaction.view isKindOfClass:[UIImageView class]]) {
         UIImageView *imageView = (UIImageView *)interaction.view;
@@ -129,6 +202,7 @@
     }
     
     UIDragItem *item = [[UIDragItem alloc] initWithItemProvider:itemProvider];
+    item.localObject = interaction.view;
     return @[item];
 }
 
@@ -139,5 +213,15 @@
         self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 60, self.view.bounds.size.width / 2, 50);
     }];
 }
+
+//- (BOOL)pointInView:(CGPoint)point view:(UIView *)view {
+//    if (point.x > view.frame.origin.x &&
+//        point.x < view.frame.origin.x + view.frame.size.width &&
+//        point.y > view.frame.origin.y &&
+//        point.y < view.frame.origin.y + view.frame.size.height) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
 @end
