@@ -6,17 +6,17 @@
 //  Copyright © 2017年 迟人华. All rights reserved.
 //
 
-#import "DADFromSelfViewController.h"
+#import "DADInOneAppViewController.h"
 #import "DADDeleteView.h"
 
 #define imageWidth 150
 #define imageHeight 150
 
-@interface DADFromSelfViewController () <UIDragInteractionDelegate, UIDropInteractionDelegate>
+@interface DADInOneAppViewController () <UIDragInteractionDelegate, UIDropInteractionDelegate>
 @property (nonatomic, strong) DADDeleteView *deleteView;
 @end
 
-@implementation DADFromSelfViewController
+@implementation DADInOneAppViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,6 +83,9 @@
 
 - (void)dragInteraction:(UIDragInteraction *)interaction willAnimateLiftWithAnimator:(id<UIDragAnimating>)animator session:(id<UIDragSession>)session {
     [animator addAnimations:^{
+        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
+    }];
+    [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
         self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
     }];
 }

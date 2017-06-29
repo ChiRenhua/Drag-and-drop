@@ -1,5 +1,5 @@
 //
-//  DADFromSelfViewController.h
+//  DADInOneAppViewController.h
 //  Drag and drop
 //
 //  Created by Renhuachi on 2017/6/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DADFromSelfViewController : UIViewController
+@interface DADInOneAppViewController : UIViewController
 
 @end

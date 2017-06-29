@@ -1,23 +1,23 @@
 //
-//  DADFromAViewController.m
+//  DADOnlyDragViewController.m
 //  Drag and drop
 //
 //  Created by 迟人华 on 2017/6/17.
 //  Copyright © 2017年 迟人华. All rights reserved.
 //
 
-#import "DADFromAViewController.h"
+#import "DADOnlyDragViewController.h"
 
 #define imageWidth 150
 #define imageHeight 150
 
-@interface DADFromAViewController () <UIDragInteractionDelegate>
+@interface DADOnlyDragViewController () <UIDragInteractionDelegate>
 
 @property (nonatomic, strong)UIImageView *tipsView;
 
 @end
 
-@implementation DADFromAViewController
+@implementation DADOnlyDragViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1,5 +1,5 @@
 //
-//  DADFromAViewController.h
+//  DADOnlyDragViewController.h
 //  Drag and drop
 //
 //  Created by 迟人华 on 2017/6/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DADFromAViewController : UIViewController
+@interface DADOnlyDragViewController : UIViewController
 
 @end

@@ -18,13 +18,14 @@
     if (self = [super initWithFrame:frame]) {
         self.frame = frame;
         self.layer.cornerRadius = frame.size.height / 4;
-        self.backgroundColor = [UIColor redColor];
         [self loadUI];
     }
     return self;
 }
 
 - (void)loadUI {
+    self.backgroundColor = [UIColor redColor];
+    
     self.deleteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"delete"]];
     [self addSubview:self.deleteImageView];
 }
