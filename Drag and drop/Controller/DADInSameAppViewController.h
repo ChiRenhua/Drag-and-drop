@@ -1,5 +1,5 @@
 //
-//  DADInOneAppViewController.h
+//  DADInSameAppViewController.h
 //  Drag and drop
 //
 //  Created by Renhuachi on 2017/6/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DADInOneAppViewController : UIViewController
+@interface DADInSameAppViewController : UIViewController
 
 @end

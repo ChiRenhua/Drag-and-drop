@@ -1,22 +1,22 @@
 //
-//  DADFromSelfViewController.m
+//  DADInSameAppViewController.m
 //  Drag and drop
 //
 //  Created by Renhuachi on 2017/6/28.
 //  Copyright © 2017年 迟人华. All rights reserved.
 //
 
-#import "DADInOneAppViewController.h"
+#import "DADInSameAppViewController.h"
 #import "DADDeleteView.h"
 
 #define imageWidth 150
 #define imageHeight 150
 
-@interface DADInOneAppViewController () <UIDragInteractionDelegate, UIDropInteractionDelegate>
+@interface DADInSameAppViewController () <UIDragInteractionDelegate, UIDropInteractionDelegate>
 @property (nonatomic, strong) DADDeleteView *deleteView;
 @end
 
-@implementation DADInOneAppViewController
+@implementation DADInSameAppViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -216,15 +216,5 @@
         self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 60, self.view.bounds.size.width / 2, 50);
     }];
 }
-
-//- (BOOL)pointInView:(CGPoint)point view:(UIView *)view {
-//    if (point.x > view.frame.origin.x &&
-//        point.x < view.frame.origin.x + view.frame.size.width &&
-//        point.y > view.frame.origin.y &&
-//        point.y < view.frame.origin.y + view.frame.size.height) {
-//        return YES;
-//    }
-//    return NO;
-//}
 
 @end

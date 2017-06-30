@@ -14,10 +14,12 @@
 		716C23501EF4E08100AA4CB4 /* Drag_and_dropUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C234F1EF4E08100AA4CB4 /* Drag_and_dropUITests.m */; };
 		716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */; };
 		716C23621EF4E16C00AA4CB4 /* DADMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */; };
+		D702EFA71F05F0BB0006FDB0 /* DADTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */; };
+		D7487A411F05F9DC001F807A /* DADTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7487A401F05F9DC001F807A /* DADTableViewModel.m */; };
 		D77B2F291F04FDA100EE47DF /* DADPosterImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */; };
 		D77B2F2C1F05009B00EE47DF /* DADPosterPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B2F2B1F05009B00EE47DF /* DADPosterPreView.m */; };
 		D7A46EC91F04FA0400F82404 /* DADVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */; };
-		D7BE56F01F03A4E8003E2665 /* DADInOneAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BE56EF1F03A4E8003E2665 /* DADInOneAppViewController.m */; };
+		D7BE56F01F03A4E8003E2665 /* DADInSameAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BE56EF1F03A4E8003E2665 /* DADInSameAppViewController.m */; };
 		D7BE56F41F03A729003E2665 /* DADDeleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BE56F31F03A729003E2665 /* DADDeleteView.m */; };
 /* End PBXBuildFile section */
 
@@ -55,14 +57,18 @@
 		716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADOnlyDragViewController.m; sourceTree = "<group>"; };
 		716C23601EF4E16C00AA4CB4 /* DADMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADMainViewController.h; sourceTree = "<group>"; };
 		716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADMainViewController.m; sourceTree = "<group>"; };
+		D702EFA51F05F0BB0006FDB0 /* DADTableViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADTableViewViewController.h; sourceTree = "<group>"; };
+		D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewViewController.m; sourceTree = "<group>"; };
+		D7487A3F1F05F9DC001F807A /* DADTableViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADTableViewModel.h; sourceTree = "<group>"; };
+		D7487A401F05F9DC001F807A /* DADTableViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewModel.m; sourceTree = "<group>"; };
 		D77B2F271F04FDA100EE47DF /* DADPosterImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADPosterImageView.h; sourceTree = "<group>"; };
 		D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADPosterImageView.m; sourceTree = "<group>"; };
 		D77B2F2A1F05009B00EE47DF /* DADPosterPreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADPosterPreView.h; sourceTree = "<group>"; };
 		D77B2F2B1F05009B00EE47DF /* DADPosterPreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADPosterPreView.m; sourceTree = "<group>"; };
 		D7A46EC71F04FA0400F82404 /* DADVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADVideoViewController.h; sourceTree = "<group>"; };
 		D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADVideoViewController.m; sourceTree = "<group>"; };
-		D7BE56EE1F03A4E8003E2665 /* DADInOneAppViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADInOneAppViewController.h; sourceTree = "<group>"; };
-		D7BE56EF1F03A4E8003E2665 /* DADInOneAppViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADInOneAppViewController.m; sourceTree = "<group>"; };
+		D7BE56EE1F03A4E8003E2665 /* DADInSameAppViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADInSameAppViewController.h; sourceTree = "<group>"; };
+		D7BE56EF1F03A4E8003E2665 /* DADInSameAppViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADInSameAppViewController.m; sourceTree = "<group>"; };
 		D7BE56F21F03A729003E2665 /* DADDeleteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADDeleteView.h; sourceTree = "<group>"; };
 		D7BE56F31F03A729003E2665 /* DADDeleteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADDeleteView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +121,7 @@
 		716C232A1EF4E08100AA4CB4 /* Drag and drop */ = {
 			isa = PBXGroup;
 			children = (
+				D7487A3E1F05F9C7001F807A /* Model */,
 				D7BE56F11F03A6F5003E2665 /* View */,
 				D7BE57281F03D3D4003E2665 /* Controller */,
 				716C232B1EF4E08100AA4CB4 /* AppDelegate.h */,
@@ -144,6 +151,15 @@
 			path = "Drag and dropUITests";
 			sourceTree = "<group>";
 		};
+		D7487A3E1F05F9C7001F807A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7487A3F1F05F9DC001F807A /* DADTableViewModel.h */,
+				D7487A401F05F9DC001F807A /* DADTableViewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D7BE56F11F03A6F5003E2665 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,10 +180,12 @@
 				716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */,
 				716C23601EF4E16C00AA4CB4 /* DADMainViewController.h */,
 				716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */,
-				D7BE56EE1F03A4E8003E2665 /* DADInOneAppViewController.h */,
-				D7BE56EF1F03A4E8003E2665 /* DADInOneAppViewController.m */,
+				D7BE56EE1F03A4E8003E2665 /* DADInSameAppViewController.h */,
+				D7BE56EF1F03A4E8003E2665 /* DADInSameAppViewController.m */,
 				D7A46EC71F04FA0400F82404 /* DADVideoViewController.h */,
 				D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */,
+				D702EFA51F05F0BB0006FDB0 /* DADTableViewViewController.h */,
+				D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -303,9 +321,11 @@
 				716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */,
 				716C233B1EF4E08100AA4CB4 /* main.m in Sources */,
 				D77B2F2C1F05009B00EE47DF /* DADPosterPreView.m in Sources */,
-				D7BE56F01F03A4E8003E2665 /* DADInOneAppViewController.m in Sources */,
+				D7BE56F01F03A4E8003E2665 /* DADInSameAppViewController.m in Sources */,
 				D77B2F291F04FDA100EE47DF /* DADPosterImageView.m in Sources */,
+				D7487A411F05F9DC001F807A /* DADTableViewModel.m in Sources */,
 				D7BE56F41F03A729003E2665 /* DADDeleteView.m in Sources */,
+				D702EFA71F05F0BB0006FDB0 /* DADTableViewViewController.m in Sources */,
 				716C232D1EF4E08100AA4CB4 /* AppDelegate.m in Sources */,
 				D7A46EC91F04FA0400F82404 /* DADVideoViewController.m in Sources */,
 				716C23621EF4E16C00AA4CB4 /* DADMainViewController.m in Sources */,

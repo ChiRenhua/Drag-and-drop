@@ -8,8 +8,9 @@
 
 #import "DADMainViewController.h"
 #import "DADOnlyDragViewController.h"
-#import "DADInOneAppViewController.h"
+#import "DADInSameAppViewController.h"
 #import "DADVideoViewController.h"
+#import "DADTableViewViewController.h"
 
 @interface DADMainViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -30,7 +31,7 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = 100;
     
-    self.cellArr = [[NSArray alloc] initWithObjects:@"Only drag", @"Drag and drop in one controller", @"TenVideo Test", @"第四个", @"第五个", @"第六个", @"第七个", nil];
+    self.cellArr = [[NSArray alloc] initWithObjects:@"Only drag", @"Drag and drop in same application", @"Drag and drop in tableView", @"TenVideo Test", @"第五个", @"第六个", @"第七个", nil];
     
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
@@ -56,19 +57,20 @@
             
             break;
         case 1: {
-            DADInOneAppViewController *oneAppVC = [[DADInOneAppViewController alloc] init];
+            DADInSameAppViewController *oneAppVC = [[DADInSameAppViewController alloc] init];
             [self.navigationController pushViewController:oneAppVC animated:YES];
         }
             
             break;
         case 2: {
-            DADVideoViewController *videoVC = [[DADVideoViewController alloc] init];
-            [self.navigationController pushViewController:videoVC animated:YES];
+            DADTableViewViewController *tableViewController = [[DADTableViewViewController alloc] init];
+            [self.navigationController pushViewController:tableViewController animated:YES];
         }
             
             break;
         case 3: {
-            
+            DADVideoViewController *videoVC = [[DADVideoViewController alloc] init];
+            [self.navigationController pushViewController:videoVC animated:YES];
         }
             
             break;
