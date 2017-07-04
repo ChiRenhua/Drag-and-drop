@@ -16,6 +16,7 @@
 		716C23621EF4E16C00AA4CB4 /* DADMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */; };
 		D702EFA71F05F0BB0006FDB0 /* DADTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */; };
 		D7487A411F05F9DC001F807A /* DADTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7487A401F05F9DC001F807A /* DADTableViewModel.m */; };
+		D77073A61F0BB9BA0006663B /* DADCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D77073A51F0BB9BA0006663B /* DADCollectionViewController.m */; };
 		D77B2F291F04FDA100EE47DF /* DADPosterImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */; };
 		D77B2F2C1F05009B00EE47DF /* DADPosterPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B2F2B1F05009B00EE47DF /* DADPosterPreView.m */; };
 		D7A46EC91F04FA0400F82404 /* DADVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */; };
@@ -61,6 +62,8 @@
 		D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewViewController.m; sourceTree = "<group>"; };
 		D7487A3F1F05F9DC001F807A /* DADTableViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADTableViewModel.h; sourceTree = "<group>"; };
 		D7487A401F05F9DC001F807A /* DADTableViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewModel.m; sourceTree = "<group>"; };
+		D77073A41F0BB9BA0006663B /* DADCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADCollectionViewController.h; sourceTree = "<group>"; };
+		D77073A51F0BB9BA0006663B /* DADCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADCollectionViewController.m; sourceTree = "<group>"; };
 		D77B2F271F04FDA100EE47DF /* DADPosterImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADPosterImageView.h; sourceTree = "<group>"; };
 		D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADPosterImageView.m; sourceTree = "<group>"; };
 		D77B2F2A1F05009B00EE47DF /* DADPosterPreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADPosterPreView.h; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 				D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */,
 				D702EFA51F05F0BB0006FDB0 /* DADTableViewViewController.h */,
 				D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */,
+				D77073A41F0BB9BA0006663B /* DADCollectionViewController.h */,
+				D77073A51F0BB9BA0006663B /* DADCollectionViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77073A61F0BB9BA0006663B /* DADCollectionViewController.m in Sources */,
 				716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */,
 				716C233B1EF4E08100AA4CB4 /* main.m in Sources */,
 				D77B2F2C1F05009B00EE47DF /* DADPosterPreView.m in Sources */,

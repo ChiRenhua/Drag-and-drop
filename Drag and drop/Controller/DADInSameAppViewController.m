@@ -92,9 +92,6 @@
     [animator addAnimations:^{
         self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
     }];
-    [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
-    }];
 }
 
 - (BOOL)dragInteraction:(UIDragInteraction *)interaction sessionAllowsMoveOperation:(id<UIDragSession>)session {

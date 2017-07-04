@@ -11,6 +11,7 @@
 #import "DADInSameAppViewController.h"
 #import "DADVideoViewController.h"
 #import "DADTableViewViewController.h"
+#import "DADCollectionViewController.h"
 
 @interface DADMainViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -31,7 +32,7 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = 100;
     
-    self.cellArr = [[NSArray alloc] initWithObjects:@"Only drag", @"Drag and drop in same application", @"Drag and drop in tableView", @"TenVideo Test", @"第五个", @"第六个", @"第七个", nil];
+    self.cellArr = [[NSArray alloc] initWithObjects:@"Only Drag", @"Drag and drop in same Application", @"Drag and drop in TableView", @"Drag and drop in CollectionView", @"TenVideo Test", @"第六个", @"第七个", nil];
     
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
@@ -63,19 +64,20 @@
             
             break;
         case 2: {
-            DADTableViewViewController *tableViewController = [[DADTableViewViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
-            [self.navigationController pushViewController:tableViewController animated:YES];
+            DADTableViewViewController *tableVC = [[DADTableViewViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
+            [self.navigationController pushViewController:tableVC animated:YES];
         }
             
             break;
         case 3: {
-            DADVideoViewController *videoVC = [[DADVideoViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
-            [self.navigationController pushViewController:videoVC animated:YES];
+            DADCollectionViewController *collectionVC = [[DADCollectionViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
+            [self.navigationController pushViewController:collectionVC animated:YES];
         }
             
             break;
         case 4: {
-            
+            DADVideoViewController *videoVC = [[DADVideoViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
+            [self.navigationController pushViewController:videoVC animated:YES];
         }
             
             break;
