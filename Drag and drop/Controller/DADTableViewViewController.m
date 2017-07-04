@@ -36,7 +36,7 @@
 
 #pragma mark - dragDelegate
 - (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
-    NSString *data = [[DADTableViewModel sharedInstance] getTableViewData][indexPath.row];
+    NSString *data = [[DADTableViewModel sharedInstance] getTableViewData] [indexPath.row];
     NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:data];
     UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
     return @[dragItem];
@@ -48,15 +48,37 @@
         if (session.items.count > 1) {
             return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationCancel];
         } else {
-          return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationMove];
+          return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationMove intent:UITableViewDropIntentInsertAtDestinationIndexPath];
         }
     }else {
-        return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationCopy];
+        return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationCopy intent:UITableViewDropIntentInsertAtDestinationIndexPath];
     }
 }
 
 - (void)tableView:(UITableView *)tableView performDropWithCoordinator:(id<UITableViewDropCoordinator>)coordinator {
-    NSLog(@"%@",coordinator.destinationIndexPath);
+    __block NSIndexPath *destinationIndexPath = coordinator.destinationIndexPath;
+    __block NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    
+    if (!destinationIndexPath) {
+        NSUInteger section = tableView.numberOfSections - 1;
+        NSUInteger row = [tableView numberOfRowsInSection:tableView.numberOfSections - 1];
+        destinationIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    }
+    
+    [coordinator.session loadObjectsOfClass:[NSString class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+        NSArray *array = (NSArray *)objects;
+        
+        for (int i = 0; i < array.count; i++) {
+            NSString *str = array[i];
+            
+            NSUInteger section = destinationIndexPath.section;
+            NSUInteger row = destinationIndexPath.row + i;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            [[DADTableViewModel sharedInstance] addItem:str atIndex:indexPath.row];
+            [indexPaths addObject:indexPath];
+        }
+        [tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
 }
 
 #pragma mark - tableViewDelegate
@@ -83,9 +105,9 @@
     return YES;
 }
 
-//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-//
-//}
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [[DADTableViewModel sharedInstance] replaceItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

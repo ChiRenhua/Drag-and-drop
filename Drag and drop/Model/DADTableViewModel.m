@@ -9,7 +9,7 @@
 #import "DADTableViewModel.h"
 
 @interface DADTableViewModel ()
-@property (nonatomic, copy) NSArray *tableViewDataArray;
+@property (nonatomic, strong) NSMutableArray *tableViewDataArray;
 @end
 
 @implementation DADTableViewModel
@@ -32,7 +32,7 @@
 }
 
 - (void)creatTableViewData {
-    self.tableViewDataArray = [[NSArray alloc] initWithObjects:@"腾讯大厦", @"松日鼎盛", @"深圳湾", @"宝安机场" , @"香港" , @"澳门" , nil];
+    self.tableViewDataArray = [[NSMutableArray alloc] initWithObjects:@"腾讯大厦", @"松日鼎盛", @"深圳湾", @"宝安机场" , @"香港" , @"澳门" , nil];
 }
 
 - (NSArray *)getTableViewData {
@@ -42,6 +42,20 @@
         [self creatTableViewData];
         return self.tableViewDataArray;
     }
+}
+
+- (void)addItem:(NSString *)item atIndex:(NSInteger)index {
+    [self.tableViewDataArray insertObject:item atIndex:index];
+}
+
+- (void)replaceItemAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)toIndex {
+    if (sourceIndex == toIndex) {
+        return;
+    }
+    
+    NSString *tempStr = self.tableViewDataArray[sourceIndex];
+    [self.tableViewDataArray removeObjectAtIndex:sourceIndex];
+    [self.tableViewDataArray insertObject:tempStr atIndex:toIndex];
 }
 
 @end

@@ -14,4 +14,8 @@
 
 - (NSArray *)getTableViewData;
 
+- (void)addItem:(NSString *)item atIndex:(NSInteger)index;
+
+- (void)replaceItemAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)toIndex;
+
 @end
