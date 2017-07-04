@@ -179,18 +179,18 @@
 		D7BE57281F03D3D4003E2665 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				716C235D1EF4E10900AA4CB4 /* DADOnlyDragViewController.h */,
-				716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */,
 				716C23601EF4E16C00AA4CB4 /* DADMainViewController.h */,
 				716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */,
+				716C235D1EF4E10900AA4CB4 /* DADOnlyDragViewController.h */,
+				716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */,
 				D7BE56EE1F03A4E8003E2665 /* DADInSameAppViewController.h */,
 				D7BE56EF1F03A4E8003E2665 /* DADInSameAppViewController.m */,
-				D7A46EC71F04FA0400F82404 /* DADVideoViewController.h */,
-				D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */,
 				D702EFA51F05F0BB0006FDB0 /* DADTableViewViewController.h */,
 				D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */,
 				D77073A41F0BB9BA0006663B /* DADCollectionViewController.h */,
 				D77073A51F0BB9BA0006663B /* DADCollectionViewController.m */,
+				D7A46EC71F04FA0400F82404 /* DADVideoViewController.h */,
+				D7A46EC81F04FA0400F82404 /* DADVideoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -8,7 +8,9 @@
 
 #import "DADCollectionViewController.h"
 
-@interface DADCollectionViewController ()
+@interface DADCollectionViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate>
+
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
@@ -24,7 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // collectionView
 }
 
 @end
