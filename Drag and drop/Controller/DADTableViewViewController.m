@@ -15,9 +15,10 @@
 
 @implementation DADTableViewViewController
 
-- (id)init {
+- (id)initWithTitleName:(NSString *)titleName {
     if (self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
+        self.navigationItem.title = titleName;
     }
     return self;
 }

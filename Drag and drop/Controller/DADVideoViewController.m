@@ -16,10 +16,16 @@
 
 @implementation DADVideoViewController
 
+- (id)initWithTitleName:(NSString *)titleName {
+    if (self = [super init]) {
+        self.view.backgroundColor = [UIColor whiteColor];
+        self.navigationItem.title = titleName;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
     
     // openSearchImage
     DADPosterImageView *openSearchImage = [[DADPosterImageView alloc] initWithImage:[UIImage imageNamed:@"chuqiao"]];

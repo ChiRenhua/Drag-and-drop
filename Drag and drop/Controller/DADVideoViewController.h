@@ -10,4 +10,6 @@
 
 @interface DADVideoViewController : UIViewController
 
+- (id)initWithTitleName:(NSString *)titleName;
+
 @end

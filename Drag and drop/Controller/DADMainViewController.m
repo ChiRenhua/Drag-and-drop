@@ -51,25 +51,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0: {
-            DADOnlyDragViewController *onlyDragVC = [[DADOnlyDragViewController alloc] init];
+            DADOnlyDragViewController *onlyDragVC = [[DADOnlyDragViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
             [self.navigationController pushViewController:onlyDragVC animated:YES];
         }
             
             break;
         case 1: {
-            DADInSameAppViewController *oneAppVC = [[DADInSameAppViewController alloc] init];
+            DADInSameAppViewController *oneAppVC = [[DADInSameAppViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
             [self.navigationController pushViewController:oneAppVC animated:YES];
         }
             
             break;
         case 2: {
-            DADTableViewViewController *tableViewController = [[DADTableViewViewController alloc] init];
+            DADTableViewViewController *tableViewController = [[DADTableViewViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
             [self.navigationController pushViewController:tableViewController animated:YES];
         }
             
             break;
         case 3: {
-            DADVideoViewController *videoVC = [[DADVideoViewController alloc] init];
+            DADVideoViewController *videoVC = [[DADVideoViewController alloc] initWithTitleName:self.cellArr[indexPath.row]];
             [self.navigationController pushViewController:videoVC animated:YES];
         }
             

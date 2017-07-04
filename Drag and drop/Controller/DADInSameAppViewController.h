@@ -10,4 +10,6 @@
 
 @interface DADInSameAppViewController : UIViewController
 
+- (id)initWithTitleName:(NSString *)titleName;
+
 @end

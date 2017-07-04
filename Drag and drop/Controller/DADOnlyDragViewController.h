@@ -10,4 +10,6 @@
 
 @interface DADOnlyDragViewController : UIViewController
 
+- (id)initWithTitleName:(NSString *)titleName;
+
 @end

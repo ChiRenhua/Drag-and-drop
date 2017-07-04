@@ -18,9 +18,16 @@
 
 @implementation DADInSameAppViewController
 
+- (id)initWithTitleName:(NSString *)titleName {
+    if (self = [super init]) {
+        self.view.backgroundColor = [UIColor whiteColor];
+        self.navigationItem.title = titleName;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     
     // imageView
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"butterfly"]];

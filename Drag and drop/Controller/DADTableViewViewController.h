@@ -10,4 +10,6 @@
 
 @interface DADTableViewViewController : UIViewController
 
+- (id)initWithTitleName:(NSString *)titleName;
+
 @end
