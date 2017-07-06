@@ -35,7 +35,7 @@
     [self.view addSubview:self.tableView];
 }
 
-#pragma mark - dragDelegate
+#pragma mark - UITableViewDragDelegate
 - (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
     NSString *data = [[DADTableViewModel sharedInstance] getTableViewData] [indexPath.row];
     NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:data];
@@ -43,7 +43,7 @@
     return @[dragItem];
 }
 
-#pragma mark - dropDelegate
+#pragma mark - UITableViewDropDelegate
 - (UITableViewDropProposal *)tableView:(UITableView *)tableView dropSessionDidUpdate:(id<UIDropSession>)session withDestinationIndexPath:(NSIndexPath *)destinationIndexPath {
     if (tableView.hasActiveDrag) {
         if (session.items.count > 1) {
@@ -82,7 +82,7 @@
     }];
 }
 
-#pragma mark - tableViewDelegate
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[DADTableViewModel sharedInstance] getTableViewData].count;
 }
@@ -110,6 +110,7 @@
     [[DADTableViewModel sharedInstance] replaceItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

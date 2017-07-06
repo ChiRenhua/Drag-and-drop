@@ -15,6 +15,7 @@
 		716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C235E1EF4E10900AA4CB4 /* DADOnlyDragViewController.m */; };
 		716C23621EF4E16C00AA4CB4 /* DADMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */; };
 		D702EFA71F05F0BB0006FDB0 /* DADTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */; };
+		D70A6C081F0DD17600A8CDE6 /* DADCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A6C071F0DD17600A8CDE6 /* DADCollectionViewCell.m */; };
 		D7487A411F05F9DC001F807A /* DADTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7487A401F05F9DC001F807A /* DADTableViewModel.m */; };
 		D77073A61F0BB9BA0006663B /* DADCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D77073A51F0BB9BA0006663B /* DADCollectionViewController.m */; };
 		D77B2F291F04FDA100EE47DF /* DADPosterImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */; };
@@ -60,6 +61,8 @@
 		716C23611EF4E16C00AA4CB4 /* DADMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADMainViewController.m; sourceTree = "<group>"; };
 		D702EFA51F05F0BB0006FDB0 /* DADTableViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADTableViewViewController.h; sourceTree = "<group>"; };
 		D702EFA61F05F0BB0006FDB0 /* DADTableViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewViewController.m; sourceTree = "<group>"; };
+		D70A6C061F0DD17600A8CDE6 /* DADCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADCollectionViewCell.h; sourceTree = "<group>"; };
+		D70A6C071F0DD17600A8CDE6 /* DADCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADCollectionViewCell.m; sourceTree = "<group>"; };
 		D7487A3F1F05F9DC001F807A /* DADTableViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADTableViewModel.h; sourceTree = "<group>"; };
 		D7487A401F05F9DC001F807A /* DADTableViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADTableViewModel.m; sourceTree = "<group>"; };
 		D77073A41F0BB9BA0006663B /* DADCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADCollectionViewController.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				D77B2F281F04FDA100EE47DF /* DADPosterImageView.m */,
 				D77B2F2A1F05009B00EE47DF /* DADPosterPreView.h */,
 				D77B2F2B1F05009B00EE47DF /* DADPosterPreView.m */,
+				D70A6C061F0DD17600A8CDE6 /* DADCollectionViewCell.h */,
+				D70A6C071F0DD17600A8CDE6 /* DADCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				TargetAttributes = {
 					716C23271EF4E08100AA4CB4 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 					};
 					716C233F1EF4E08100AA4CB4 = {
 						CreatedOnToolsVersion = 9.0;
@@ -326,6 +332,7 @@
 				D77073A61F0BB9BA0006663B /* DADCollectionViewController.m in Sources */,
 				716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */,
 				716C233B1EF4E08100AA4CB4 /* main.m in Sources */,
+				D70A6C081F0DD17600A8CDE6 /* DADCollectionViewCell.m in Sources */,
 				D77B2F2C1F05009B00EE47DF /* DADPosterPreView.m in Sources */,
 				D7BE56F01F03A4E8003E2665 /* DADInSameAppViewController.m in Sources */,
 				D77B2F291F04FDA100EE47DF /* DADPosterImageView.m in Sources */,
@@ -397,7 +404,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: crh944015688@163.com (A676Z972K9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -450,7 +457,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: crh944015688@163.com (A676Z972K9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -474,12 +481,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V5QYPYR594;
 				INFOPLIST_FILE = "Drag and drop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "RenhuaChi.Drag-and-drop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -487,12 +497,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V5QYPYR594;
 				INFOPLIST_FILE = "Drag and drop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "RenhuaChi.Drag-and-drop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

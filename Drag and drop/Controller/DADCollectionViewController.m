@@ -7,8 +7,11 @@
 //
 
 #import "DADCollectionViewController.h"
+#import "DADCollectionViewCell.h"
 
-#define CellReuseIdentifier @"CellReuseIdentifier"
+#define CELL_WIDTH 300
+#define CELL_HEIGHT 200
+
 @interface DADCollectionViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -21,15 +24,15 @@
 - (id)initWithTitleName:(NSString *)titleName {
     if (self = [super init]) {
         self.navigationItem.title = titleName;
-        [self loadData];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self loadData];
     [self creatCollectionView];
-    // collectionView
 }
 
 - (void)loadData {
@@ -38,24 +41,19 @@
 
 - (void)creatCollectionView {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    layout.minimumInteritemSpacing = 5;
-    //上下两个item的最小间距
-    layout.minimumLineSpacing = 5;
-    
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    [self.view addSubview:self.collectionView];
-    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.collectionView.dragDelegate = self;
+    self.collectionView.dropDelegate = self;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.collectionView registerClass:[DADCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([DADCollectionViewCell class])];
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellReuseIdentifier];
+    [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - CollectionViewDelegate
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -65,18 +63,84 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellReuseIdentifier forIndexPath:indexPath];
+    DADCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([DADCollectionViewCell class]) forIndexPath:indexPath];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.dataArray[indexPath.row]]];
-    imageView.frame = cell.frame;
-    [cell addSubview:imageView];
+    UIImage *image = [UIImage imageNamed:self.dataArray[indexPath.row]];
+    [cell setContentImage:image];
+    cell.backgroundColor = [UIColor redColor];
     
     return cell;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath NS_AVAILABLE_IOS(9_0) {
+    
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(300, 150);
+    return CGSizeMake(CELL_WIDTH, CELL_HEIGHT);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    NSInteger gap = [self cellGap];
+    return UIEdgeInsetsMake(gap, gap, gap, gap);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return [self cellGap];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return [self cellGap];
+}
+
+#pragma mark - UICollectionViewDragDelegate
+- (NSArray<UIDragItem *> *)collectionView:(UICollectionView *)collectionView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
+    UIImage *image = [UIImage imageNamed:self.dataArray[indexPath.row]];
+    NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:image];
+    UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
+    return @[dragItem];
+}
+
+#pragma mark - UICollectionViewDropDelegate
+
+- (UICollectionViewDropProposal *)collectionView:(UICollectionView *)collectionView dropSessionDidUpdate:(id<UIDropSession>)session withDestinationIndexPath:(NSIndexPath *)destinationIndexPath {
+    if (collectionView.hasActiveDrag) {
+        if (session.items.count > 1) {
+            return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationCancel];
+        } else {
+            return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationMove intent:UICollectionViewDropIntentUnspecified];
+        }
+    }else {
+        return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationCopy intent:UICollectionViewDropIntentUnspecified];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performDropWithCoordinator:(id<UICollectionViewDropCoordinator>)coordinator {
+    
+}
+
+#pragma mark - Helper
+- (NSInteger)cellGap {
+    return (self.view.bounds.size.width - CELL_WIDTH * 3) / 4;
 }
 
 @end

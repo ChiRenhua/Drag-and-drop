@@ -58,7 +58,6 @@
 - (nullable UITargetedDragPreview *)dragInteraction:(UIDragInteraction *)interaction previewForLiftingItem:(UIDragItem *)item session:(id<UIDragSession>)session {
     interaction.view.alpha = 0.5;
     
-    
     DADPosterPreView *preView = [[DADPosterPreView alloc] initWithFrame:CGRectMake(0, 0, 175.2, 286.72)];
     [preView setImage:interaction.view];
     
