@@ -32,7 +32,7 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = 100;
     
-    self.cellArr = [[NSArray alloc] initWithObjects:@"Only Drag", @"Drag and drop in same Application", @"Drag and drop in TableView", @"Drag and drop in CollectionView", @"TenVideo Test", @"Six", @"Seven", nil];
+    self.cellArr = [[NSArray alloc] initWithObjects:@"Only Drag", @"Drag and drop in same Application", @"Drag and drop in TableView", @"Drag and drop in CollectionView", @"TenVideo Test", @"Placeholder", @"Placeholder", @"Placeholder", nil];
     
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
@@ -90,6 +90,10 @@
             
         }
             
+            break;
+        case 7: {
+            
+        }
             break;
         default:
             break;

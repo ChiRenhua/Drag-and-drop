@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		711F5D7F1F0E846D0074E6CF /* DADCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F5D7E1F0E846D0074E6CF /* DADCollectionViewModel.m */; };
 		716C232D1EF4E08100AA4CB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C232C1EF4E08100AA4CB4 /* AppDelegate.m */; };
 		716C23351EF4E08100AA4CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716C23341EF4E08100AA4CB4 /* Assets.xcassets */; };
 		716C233B1EF4E08100AA4CB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 716C233A1EF4E08100AA4CB4 /* main.m */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		711F5D7D1F0E846D0074E6CF /* DADCollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DADCollectionViewModel.h; sourceTree = "<group>"; };
+		711F5D7E1F0E846D0074E6CF /* DADCollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DADCollectionViewModel.m; sourceTree = "<group>"; };
 		716C23281EF4E08100AA4CB4 /* Drag and drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drag and drop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		716C232B1EF4E08100AA4CB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		716C232C1EF4E08100AA4CB4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 			children = (
 				D7487A3F1F05F9DC001F807A /* DADTableViewModel.h */,
 				D7487A401F05F9DC001F807A /* DADTableViewModel.m */,
+				711F5D7D1F0E846D0074E6CF /* DADCollectionViewModel.h */,
+				711F5D7E1F0E846D0074E6CF /* DADCollectionViewModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711F5D7F1F0E846D0074E6CF /* DADCollectionViewModel.m in Sources */,
 				D77073A61F0BB9BA0006663B /* DADCollectionViewController.m in Sources */,
 				716C235F1EF4E10900AA4CB4 /* DADOnlyDragViewController.m in Sources */,
 				716C233B1EF4E08100AA4CB4 /* main.m in Sources */,
