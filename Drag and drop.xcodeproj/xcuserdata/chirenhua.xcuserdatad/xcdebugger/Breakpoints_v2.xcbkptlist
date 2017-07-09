@@ -2,4 +2,69 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Drag and drop/Controller/DADTableViewViewController.m"
+            timestampString = "521198071.022197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-tableView:performDropWithCoordinator:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DADTableViewViewController tableView:performDropWithCoordinator:]"
+                  moduleName = "Drag and drop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chirenhua/Drag%20and%20drop/Drag%20and%20drop/Controller/DADTableViewViewController.m"
+                  timestampString = "521305305.244294"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__Block_byref_object_copy_"
+                  moduleName = "Drag and drop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chirenhua/Drag%20and%20drop/Drag%20and%20drop/Controller/DADTableViewViewController.m"
+                  timestampString = "521305305.245949"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__Block_byref_object_dispose_"
+                  moduleName = "Drag and drop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chirenhua/Drag%20and%20drop/Drag%20and%20drop/Controller/DADTableViewViewController.m"
+                  timestampString = "521305305.247621"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

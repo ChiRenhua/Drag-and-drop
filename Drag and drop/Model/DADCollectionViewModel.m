@@ -54,9 +54,9 @@
         return;
     }
     
-    NSString *tempStr = self.collectionViewDataArray[sourceIndex];
+    NSString *tempImage = self.collectionViewDataArray[sourceIndex];
     [self.collectionViewDataArray removeObjectAtIndex:sourceIndex];
-    [self.collectionViewDataArray insertObject:tempStr atIndex:toIndex];
+    [self.collectionViewDataArray insertObject:tempImage atIndex:toIndex];
 }
 
 - (void)addImage:(id)image atIndex:(NSInteger)index {
