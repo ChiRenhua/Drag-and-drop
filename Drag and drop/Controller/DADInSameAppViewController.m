@@ -11,6 +11,7 @@
 
 #define imageWidth 150
 #define imageHeight 150
+#define sourceImageTag 0
 
 @interface DADInSameAppViewController () <UIDragInteractionDelegate, UIDropInteractionDelegate>
 @property (nonatomic, strong) DADDeleteView *deleteView;
@@ -33,6 +34,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"butterfly"]];
     imageView.frame = CGRectMake((self.view.bounds.size.width / 2 - 150) / 2 , (self.view.bounds.size.height - 150) / 2, 150, 150);
     imageView.layer.cornerRadius = imageView.frame.size.height / 4;
+    imageView.tag = sourceImageTag;
     
     UIDragInteraction *imageDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
     [imageView addInteraction:imageDragInteraction];
@@ -100,9 +102,7 @@
 }
 
 - (void)dragInteraction:(UIDragInteraction *)interaction willAnimateLiftWithAnimator:(id<UIDragAnimating>)animator session:(id<UIDragSession>)session {
-    [animator addAnimations:^{
-        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
-    }];
+    [self hideDeleteView:NO withAnimator:animator];
 }
 
 - (BOOL)dragInteraction:(UIDragInteraction *)interaction sessionAllowsMoveOperation:(id<UIDragSession>)session {
@@ -115,9 +115,7 @@
 }
 
 - (void)dragInteraction:(UIDragInteraction *)interaction item:(UIDragItem *)item willAnimateCancelWithAnimator:(id<UIDragAnimating>)animator {
-    [animator addAnimations:^{
-        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 60, self.view.bounds.size.width / 2, 50);
-    }];
+    [self hideDeleteView:YES withAnimator:animator];
 }
 
 - (void)dragInteraction:(UIDragInteraction *)interaction sessionDidTransferItems:(id<UIDragSession>)session {
@@ -125,7 +123,7 @@
         UIImageView *imageView = (UIImageView *)interaction.view;
         imageView.image = nil;
         
-    }else if([interaction.view isKindOfClass:[UILabel class]]) {
+    } else if ([interaction.view isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)interaction.view;
         label.text = nil;
     }
@@ -138,7 +136,7 @@
     if ([interaction.view isKindOfClass:[UIImageView class]]) {
         if ([session canLoadObjectsOfClass:[UIImage class]]) {
             dropOperation = UIDropOperationMove;
-        }else {
+        } else {
             dropOperation = UIDropOperationForbidden;
         }
     }
@@ -146,7 +144,7 @@
     if ([interaction.view isKindOfClass:[UILabel class]]) {
         if ([session canLoadObjectsOfClass:[NSString class]]) {
             dropOperation = UIDropOperationMove;
-        }else {
+        } else {
             dropOperation = UIDropOperationForbidden;
         }
     }
@@ -183,15 +181,17 @@
     
     __typeof(&*self) __weak weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf hideDeleteView];
+        [weakSelf hideDeleteView:YES withAnimator:nil];
     });
 }
 
 #pragma mark - help
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction session:(id<UIDragSession>)session{
     __block BOOL isRepeat = NO;
+    NSItemProvider *itemProvider;
+    
     [session.items enumerateObjectsUsingBlock:^(UIDragItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.localObject == interaction.view) {
+        if ([obj.localObject integerValue] == interaction.view.tag) {
             isRepeat = YES;
         }
     }];
@@ -199,7 +199,7 @@
     if (isRepeat) {
         return nil;
     }
-    NSItemProvider *itemProvider;
+    
     if ([interaction.view isKindOfClass:[UIImageView class]]) {
         UIImageView *imageView = (UIImageView *)interaction.view;
         UIImage *image = imageView.image;
@@ -208,7 +208,7 @@
             return nil;
         }
         itemProvider = [[NSItemProvider alloc] initWithObject:image];
-    }else if([interaction.view isKindOfClass:[UILabel class]]) {
+    } else if ([interaction.view isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)interaction.view;
         NSString *text = label.text;
         
@@ -219,16 +219,25 @@
     }
     
     UIDragItem *item = [[UIDragItem alloc] initWithItemProvider:itemProvider];
-    item.localObject = interaction.view;
+    item.localObject = @(sourceImageTag);
     return @[item];
 }
 
-- (void)hideDeleteView {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 60, self.view.bounds.size.width / 2, 50);
-    } completion:^(BOOL finished) {
-        self.deleteView.frame = CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 60, self.view.bounds.size.width / 2, 50);
-    }];
+- (void)hideDeleteView:(BOOL)hide withAnimator:(id<UIDragAnimating>)animator {
+    
+    __block CGRect deleteViewRect = CGRectMake(self.view.bounds.size.width / 4, hide ? self.view.bounds.size.height + 60 : self.view.bounds.size.height - 60, self.view.bounds.size.width / 2, 50);
+    
+    if (animator) {
+        [animator addAnimations:^{
+            self.deleteView.frame = deleteViewRect;
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.deleteView.frame = deleteViewRect;
+        } completion:^(BOOL finished) {
+            self.deleteView.frame = deleteViewRect;
+        }];
+    }
 }
 
 @end

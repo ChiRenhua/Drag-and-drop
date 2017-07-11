@@ -155,7 +155,7 @@
         }
         
         itemProvider = [[NSItemProvider alloc] initWithObject:image];
-    } else if([interaction.view isKindOfClass:[UILabel class]]) {
+    } else if ([interaction.view isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)interaction.view;
         NSString *text = label.text;
         

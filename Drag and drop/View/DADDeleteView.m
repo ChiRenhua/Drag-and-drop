@@ -17,15 +17,15 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.frame = frame;
+        self.backgroundColor = [UIColor redColor];
         self.layer.cornerRadius = frame.size.height / 4;
+        self.userInteractionEnabled = YES;
         [self loadUI];
     }
     return self;
 }
 
 - (void)loadUI {
-    self.backgroundColor = [UIColor redColor];
-    
     self.deleteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"delete"]];
     [self addSubview:self.deleteImageView];
 }

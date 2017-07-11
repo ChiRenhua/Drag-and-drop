@@ -51,7 +51,7 @@
         } else {
           return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationMove intent:UITableViewDropIntentInsertAtDestinationIndexPath];
         }
-    }else {
+    } else {
         return [[UITableViewDropProposal alloc] initWithDropOperation:UIDropOperationCopy intent:UITableViewDropIntentInsertAtDestinationIndexPath];
     }
 }
@@ -93,7 +93,7 @@
     
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DADTableViewCell"];
-    }else {
+    } else {
         cell.textLabel.text = @"";
     }
     
