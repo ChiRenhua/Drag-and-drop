@@ -32,6 +32,7 @@
     // imageView
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"butterfly"]];
     imageView.frame = CGRectMake((self.view.bounds.size.width / 2 - 150) / 2 , (self.view.bounds.size.height - 150) / 2, 150, 150);
+    imageView.layer.cornerRadius = imageView.frame.size.height / 4;
     
     UIDragInteraction *imageDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
     [imageView addInteraction:imageDragInteraction];
@@ -43,38 +44,48 @@
     UIImageView *copyImageView = [[UIImageView alloc] init];
     copyImageView.frame = CGRectMake((self.view.bounds.size.width * 3 / 4 - 75) , (self.view.bounds.size.height - 150) / 2, 150, 150);
     copyImageView.backgroundColor = [UIColor lightGrayColor];
+    copyImageView.layer.cornerRadius = copyImageView.frame.size.height / 4;
+    
     UIDropInteraction *copyImageDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
     [copyImageView addInteraction:copyImageDropInteraction];
     copyImageView.userInteractionEnabled = YES;
-    copyImageView.layer.cornerRadius = 37.5;
     
     [self.view addSubview:copyImageView];
     
     // label
-    UIDragInteraction *labelDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width / 2 - self.view.bounds.size.width / 4) / 2, self.view.bounds.size.height / 4, self.view.bounds.size.width / 4, 30)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width / 2 - self.view.bounds.size.width / 3) / 2, self.view.bounds.size.height / 4, self.view.bounds.size.width / 3, 30)];
     label.text = @"来呀来呀拖我呀～～";
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor blackColor];
-    label.userInteractionEnabled = YES;
+    label.layer.cornerRadius = label.frame.size.height / 4;
+    label.clipsToBounds = YES;
+    
+    UIDragInteraction *labelDragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
     [label addInteraction:labelDragInteraction];
+    label.userInteractionEnabled = YES;
+    
     [self.view addSubview:label];
     
     // copyLabel
-    UIDropInteraction *copyLabelDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
-    UILabel *copyLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width * 3 / 4 - self.view.bounds.size.width / 8), self.view.bounds.size.height / 4, self.view.bounds.size.width / 4, 30)];
+    UILabel *copyLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width * 3 / 4 - self.view.bounds.size.width / 6), self.view.bounds.size.height / 4, self.view.bounds.size.width / 3, 30)];
     copyLabel.backgroundColor = [UIColor lightGrayColor];
     copyLabel.textAlignment = NSTextAlignmentCenter;
     copyLabel.textColor = [UIColor blackColor];
-    copyLabel.userInteractionEnabled = YES;
-    copyLabel.layer.cornerRadius = 15.0f;
+    copyLabel.layer.cornerRadius = copyLabel.frame.size.height / 4;
+    copyLabel.clipsToBounds = YES;
+    
+    UIDropInteraction *copyLabelDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
     [copyLabel addInteraction:copyLabelDropInteraction];
+    copyLabel.userInteractionEnabled = YES;
+    
     [self.view addSubview:copyLabel];
     
     // deleteView
-    UIDropInteraction *deleteViewDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
     self.deleteView = [[DADDeleteView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 4, self.view.bounds.size.height + 50, self.view.bounds.size.width / 2, 50)];
+    
+    UIDropInteraction *deleteViewDropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
     [self.deleteView addInteraction:deleteViewDropInteraction];
+    
     [self.view addSubview:self.deleteView];
 }
 
@@ -121,7 +132,6 @@
 }
 
 #pragma mark - drop
-
 - (UIDropProposal *)dropInteraction:(UIDropInteraction *)interaction sessionDidUpdate:(id<UIDropSession>)session {
     UIDropOperation dropOperation = UIDropOperationForbidden;
     

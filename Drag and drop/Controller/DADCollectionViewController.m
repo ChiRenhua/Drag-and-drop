@@ -16,7 +16,6 @@
 @interface DADCollectionViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSIndexPath *sourceIndexPath;
 
 @end
 
@@ -66,6 +65,14 @@
     return cell;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [[DADCollectionViewModel sharedInstance] replaceImageAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
+
 #pragma mark - UICollectionViewDelegate
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -88,7 +95,6 @@
 
 #pragma mark - UICollectionViewDragDelegate
 - (NSArray<UIDragItem *> *)collectionView:(UICollectionView *)collectionView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
-    self.sourceIndexPath = indexPath;
     UIImage *image = [[DADCollectionViewModel sharedInstance] getCollectionViewData] [indexPath.row];
     NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:image];
     UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
@@ -113,55 +119,26 @@
     __block NSIndexPath *destinationIndexPath = coordinator.destinationIndexPath;
     __block NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     
-    if (collectionView.hasActiveDrag) {
-        return;
-    }
-    
     if (!destinationIndexPath) {
         NSUInteger section = collectionView.numberOfSections - 1;
         NSUInteger row = [collectionView numberOfItemsInSection:collectionView.numberOfSections - 1];
         destinationIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     }
     
-    coordinator.session.progressIndicatorStyle = UIDropSessionProgressIndicatorStyleNone;
-    
-    [coordinator.items enumerateObjectsUsingBlock:^(id<UICollectionViewDropItem>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSItemProvider *itemProvider = obj.dragItem.itemProvider;
-        __block id<UICollectionViewDropPlaceholderContext> placeHolderContext;
+    [coordinator.session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+        NSArray *array = (NSArray *)objects;
         
-        if ([itemProvider canLoadObjectOfClass:[UIImage class]]) {
-            placeHolderContext = [coordinator dropItem:obj.dragItem toPlaceholderInsertedAtIndexPath:destinationIndexPath withReuseIdentifier:NSStringFromClass([DADCollectionViewCell class]) cellUpdateHandler:^(__kindof UICollectionViewCell * _Nonnull cell) {
-                
-            }];
-            [itemProvider loadObjectOfClass:[UIImage class] completionHandler:^(id<NSItemProviderReading>  _Nullable object, NSError * _Nullable error) {
-//                dispatch_sync(dispatch_get_main_queue(), ^{
-//                    if (placeHolderContext) {
-//
-//                    }
-//                });
-                [placeHolderContext commitInsertionWithDataSourceUpdates:^(NSIndexPath * _Nonnull insertionIndexPath) {
-                    
-                }];
-            }];
+        for (int i = 0; i < array.count; i++) {
+            UIImage *image = array[i];
+            
+            NSUInteger section = destinationIndexPath.section;
+            NSUInteger row = destinationIndexPath.row + i;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            [[DADCollectionViewModel sharedInstance] addImage:image atIndex:indexPath.row];
+            [indexPaths addObject:indexPath];
         }
-        
-        
+        [collectionView insertItemsAtIndexPaths:indexPaths];
     }];
-    
-//    [coordinator.session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
-//        NSArray *array = (NSArray *)objects;
-//
-//        for (int i = 0; i < array.count; i++) {
-//            UIImage *image = array[i];
-//
-//            NSUInteger section = destinationIndexPath.section;
-//            NSUInteger row = destinationIndexPath.row + i;
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-//            [[DADCollectionViewModel sharedInstance] addImage:image atIndex:indexPath.row];
-//            [indexPaths addObject:indexPath];
-//        }
-//        [collectionView insertItemsAtIndexPaths:indexPaths];
-//    }];
 }
 
 #pragma mark - Helper
@@ -170,3 +147,4 @@
 }
 
 @end
+
