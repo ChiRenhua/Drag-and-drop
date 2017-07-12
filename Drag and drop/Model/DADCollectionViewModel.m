@@ -63,4 +63,8 @@
     [self.collectionViewDataArray insertObject:image atIndex:index];
 }
 
+- (void)deleteImageAtIndex:(NSInteger)index {
+    [self.collectionViewDataArray removeObjectAtIndex:index];
+}
+
 @end

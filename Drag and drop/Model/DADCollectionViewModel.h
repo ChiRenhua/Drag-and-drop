@@ -19,4 +19,6 @@
 
 - (void)replaceImageAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)toIndex;
 
+- (void)deleteImageAtIndex:(NSInteger)index;
+
 @end

@@ -105,11 +105,7 @@
 
 - (UICollectionViewDropProposal *)collectionView:(UICollectionView *)collectionView dropSessionDidUpdate:(id<UIDropSession>)session withDestinationIndexPath:(NSIndexPath *)destinationIndexPath {
     if (collectionView.hasActiveDrag) {
-        if (session.items.count > 1) {
-            return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationCancel];
-        } else {
-            return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationMove intent:UICollectionViewDropIntentInsertAtDestinationIndexPath];
-        }
+        return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationCancel];
     }else {
         return [[UICollectionViewDropProposal alloc] initWithDropOperation:UIDropOperationCopy intent:UICollectionViewDropIntentInsertAtDestinationIndexPath];
     }
