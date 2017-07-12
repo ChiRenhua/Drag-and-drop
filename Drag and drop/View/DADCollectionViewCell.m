@@ -11,6 +11,7 @@
 @interface DADCollectionViewCell ()
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIActivityIndicatorView *loadingView;
 
 @end
 
@@ -19,6 +20,7 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor grayColor];
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [self addSubview:self.imageView];
     }
@@ -27,6 +29,15 @@
 
 - (void)setContentImage:(UIImage *)image {
     self.imageView.image = image;
+    [self.loadingView stopAnimating];
+    [self setNeedsLayout];
+}
+
+- (void)startLoading {
+    self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.loadingView.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+    [self addSubview:self.loadingView];
+    [self.loadingView startAnimating];
     [self setNeedsLayout];
 }
 

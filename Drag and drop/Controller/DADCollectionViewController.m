@@ -117,7 +117,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView performDropWithCoordinator:(id<UICollectionViewDropCoordinator>)coordinator {
     __block NSIndexPath *destinationIndexPath = coordinator.destinationIndexPath;
-    __block NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     
     if (!destinationIndexPath) {
         NSUInteger section = collectionView.numberOfSections - 1;
@@ -125,20 +124,50 @@
         destinationIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     }
     
-    [coordinator.session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
-        NSArray *array = (NSArray *)objects;
+    [coordinator.items enumerateObjectsUsingBlock:^(id<UICollectionViewDropItem>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSItemProvider *itemProvider = obj.dragItem.itemProvider;
         
-        for (int i = 0; i < array.count; i++) {
-            UIImage *image = array[i];
+        if ([itemProvider canLoadObjectOfClass:[UIImage class]]) {
+            __block id<UICollectionViewDropPlaceholderContext> collectionViewDropPlaceholderContext = [coordinator dropItem:obj.dragItem toPlaceholderInsertedAtIndexPath:destinationIndexPath withReuseIdentifier:NSStringFromClass([DADCollectionViewCell class]) cellUpdateHandler:^(__kindof UICollectionViewCell * _Nonnull cellUpdateHandler) {
+                DADCollectionViewCell *dadCell = (DADCollectionViewCell *)cellUpdateHandler;
+                [dadCell startLoading];
+            }];
             
-            NSUInteger section = destinationIndexPath.section;
-            NSUInteger row = destinationIndexPath.row + i;
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            [[DADCollectionViewModel sharedInstance] addImage:image atIndex:indexPath.row];
-            [indexPaths addObject:indexPath];
+            [itemProvider loadObjectOfClass:[UIImage class] completionHandler:^(id<NSItemProviderReading>  _Nullable object, NSError * _Nullable error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([object isKindOfClass:[UIImage class]]) {
+                        int delayTime = arc4random() % 10;
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [collectionViewDropPlaceholderContext commitInsertionWithDataSourceUpdates:^(NSIndexPath * _Nonnull insertionIndexPath) {
+                                UIImage *image = (UIImage *)object;
+                                [[DADCollectionViewModel sharedInstance] addImage:image atIndex:insertionIndexPath.row];
+                            }];
+                        });
+                    } else {
+                        [collectionViewDropPlaceholderContext deletePlaceholder];
+                    }
+                    
+                });
+            }];
         }
-        [collectionView insertItemsAtIndexPaths:indexPaths];
     }];
+    
+    
+//    __block NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//    [coordinator.session loadObjectsOfClass:[UIImage class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+//        NSArray *array = (NSArray *)objects;
+//
+//        for (int i = 0; i < array.count; i++) {
+//            UIImage *image = array[i];
+//
+//            NSUInteger section = destinationIndexPath.section;
+//            NSUInteger row = destinationIndexPath.row + i;
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+//            [[DADCollectionViewModel sharedInstance] addImage:image atIndex:indexPath.row];
+//            [indexPaths addObject:indexPath];
+//        }
+//        [collectionView insertItemsAtIndexPaths:indexPaths];
+//    }];
 }
 
 #pragma mark - Helper

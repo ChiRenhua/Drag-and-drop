@@ -12,4 +12,6 @@
 
 - (void)setContentImage:(UIImage *)image;
 
+- (void)startLoading;
+
 @end
